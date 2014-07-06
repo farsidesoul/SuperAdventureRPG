@@ -395,28 +395,7 @@ namespace SuperAdventure
             else
             {
                 // Monster is still alive
-
-                // Determine the amount of damage the monster does to the player
-                int damageToPlayer = RandomNumberGenerator.NumberBetween(0, _currentMonster.MaximumDamage);
-
-                // Display message
-                rtbMessages.Text += @"The " + _currentMonster.Name + @" did " + damageToPlayer + @" points of damage." +
-                                    Environment.NewLine;
-
-                // Subtract damage from player
-                _player.CurrentHitPoints -= damageToPlayer;
-
-                // Refresh player data in UI
-                lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-
-                if (_player.CurrentHitPoints <= 0)
-                {
-                    // Display message
-                    rtbMessages.Text += @"The " + _currentMonster.Name + @" killed you." + Environment.NewLine;
-
-                    // Move player to "Home"
-                    MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
-                }
+                MonsterDamagetoPlayer();
             }
         }
 
@@ -448,7 +427,12 @@ namespace SuperAdventure
             rtbMessages.Text += @"You drink a " + potion.Name + Environment.NewLine;
 
             // Monster gets their turn to attack
+            MonsterDamagetoPlayer();
 
+        }
+
+        private void MonsterDamagetoPlayer()
+        {
             // Determine the amount of damage the monster does to the player
             int damageToPlayer = RandomNumberGenerator.NumberBetween(0, _currentMonster.MaximumDamage);
 
