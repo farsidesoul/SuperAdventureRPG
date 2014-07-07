@@ -334,6 +334,9 @@ namespace SuperAdventure
                 _player.Gold += _currentMonster.RewardGold;
                 rtbMessages.Text += @"You recieve " + _currentMonster.RewardGold + @" gold." + Environment.NewLine;
 
+                // Check if player levels up
+                DoesPlayerLevelUp();
+
                 // Get random loot items from the monster
                 List<InventoryItem> lootedItems = new List<InventoryItem>();
 
@@ -456,6 +459,22 @@ namespace SuperAdventure
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             UpdateInventoryListInUI();
             UpdatePotionListInUI();
+        }
+
+        private void DoesPlayerLevelUp()
+        {
+            if (_player.ExperiencePoints >= 50)
+            {
+                _player.Level += 1;
+                _player.ExperiencePoints = 0;
+                _player.MaximumHitPoints += 5;
+                rtbMessages.Text += Environment.NewLine + @"You leveled up!" + Environment.NewLine;
+                rtbMessages.Text += @"You gain 5 health." + Environment.NewLine +
+                                    Environment.NewLine;
+                lblExperience.Text = _player.ExperiencePoints.ToString();
+                lblLevel.Text = _player.Level.ToString();
+            }
+
         }
 
         private void rtbMessages_TextChanged(object sender, EventArgs e)
