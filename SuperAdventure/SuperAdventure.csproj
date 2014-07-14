@@ -60,6 +60,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SuperAdventure.resx">
       <DependentUpon>SuperAdventure.cs</DependentUpon>
@@ -82,6 +83,57 @@
       <Project>{c3d52064-35ac-453e-9423-4bc8c967a9c5}</Project>
       <Name>Engine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlchemyHut.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bridge.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FarmHouse.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fields.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GuardHouse.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HerbGarden.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SpiderForest.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TownSquare.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0001_Bridge.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0002_Guard House.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0003_Herb Garden.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0004_Alchemy Hut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0005_Fields.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0006_Farm Hosue.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0007_Town Square.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Map_0008_Home.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

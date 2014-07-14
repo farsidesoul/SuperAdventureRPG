@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,10 +28,7 @@ namespace SuperAdventure
             MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
             _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
  
-            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-            lblGold.Text = _player.Gold.ToString();
-            lblExperience.Text = _player.ExperiencePoints.ToString();
-            lblLevel.Text = _player.Level.ToString();
+            UpdatePlayerStats();
         }
 
         private void btnNorth_Click(object sender, EventArgs e)
@@ -79,7 +78,7 @@ namespace SuperAdventure
             _player.CurrentHitPoints = _player.MaximumHitPoints;
 
             // Update Hit points in UI
-            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+            UpdatePlayerStats();
 
             // Does the location have a quest?
             if (newLocation.QuestAvailableHere != null)
@@ -377,11 +376,7 @@ namespace SuperAdventure
                 }
 
                 // Refresh player information and inventory controls
-                lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-                lblGold.Text = _player.Gold.ToString();
-                lblExperience.Text = _player.ExperiencePoints.ToString();
-                lblLevel.Text = _player.Level.ToString();
-
+                UpdatePlayerStats();
                 UpdateInventoryListInUI();
                 UpdateWeaponListInUI();
                 UpdatePotionListInUI();
@@ -453,9 +448,17 @@ namespace SuperAdventure
             }
 
             // Refresh player data in UI
-            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+            UpdatePlayerStats();
             UpdateInventoryListInUI();
             UpdatePotionListInUI();
+        }
+
+        private void UpdatePlayerStats()
+        {
+            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
+            lblGold.Text = _player.Gold.ToString();
+            lblExperience.Text = _player.ExperiencePoints.ToString();
+            lblLevel.Text = _player.Level.ToString();
         }
 
         private void rtbMessages_TextChanged(object sender, EventArgs e)
@@ -464,5 +467,40 @@ namespace SuperAdventure
             rtbMessages.ScrollToCaret();
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            const string savePath = @"C:\Users\Public\Documents\save.txt";
+            string[] playerInformation =
+            {
+                _player.CurrentHitPoints.ToString(), _player.Gold.ToString(),
+                _player.ExperiencePoints.ToString(), _player.Level.ToString()
+            };
+
+            File.WriteAllLines(savePath, playerInformation);
+
+            MessageBox.Show("Game Saved Successfully.");
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            const string loadPath = @"C:\Users\Public\Documents\save.txt";
+            try
+            {
+                string[] playerInformation = File.ReadAllLines(loadPath);
+                _player.CurrentHitPoints = Convert.ToInt16(playerInformation[0]);
+                _player.Gold = Convert.ToInt16(playerInformation[1]);
+                _player.ExperiencePoints = Convert.ToInt16(playerInformation[2]);
+                _player.Level = Convert.ToInt16(playerInformation[3]);
+                UpdatePlayerStats();
+
+                MessageBox.Show("Game Loaded Successfully.");
+            }
+            catch (FileNotFoundException)
+            {
+                
+            }
+        }
+
+        
     }
 }
